@@ -4,6 +4,7 @@ using UnityEditor;
 using UnityEngine.UIElements;
 using UnityEditor.Experimental.GraphView;
 using System.Linq;
+using System;
 
 using BTNode = Game.AI.BehaviorTree.Node;
 
@@ -15,6 +16,8 @@ namespace Game.AI.BehaviorTree.Window
         {
 
         }
+
+        public Action<NodeView> m_OnNodeSelected;
 
         private BehaviorTree m_Tree;
 
@@ -45,10 +48,37 @@ namespace Game.AI.BehaviorTree.Window
 
             graphViewChanged += OnGraphViewChanged;
 
+            if (tree.m_rootNode == null)
+            {
+                tree.m_rootNode = tree.CreateNode(typeof(RootNode)) as RootNode;
+                EditorUtility.SetDirty(tree);
+                AssetDatabase.SaveAssets();
+            }
+
+            // create node view
             tree.m_Nodes.ForEach((n) =>
             {
                 CreateNodeView(n);
             });
+
+            // create node edges
+            tree.m_Nodes.ForEach((n) =>
+            {
+                var child = tree.GetChilds(n);
+                child.ForEach(c => 
+                {
+                    var parentView = FindNodeView(n);
+                    var childView = FindNodeView(c);
+
+                    var edge = parentView.m_Output.ConnectTo(childView.m_Input);
+                    AddElement(edge);
+                });
+            });
+        }
+
+        private NodeView FindNodeView(Node node)
+        {
+            return GetNodeByGuid(node.m_Guid) as NodeView;
         }
 
         public override List<Port> GetCompatiblePorts(Port startPort, NodeAdapter nodeAdapter)
@@ -94,6 +124,7 @@ namespace Game.AI.BehaviorTree.Window
         private void CreateNodeView(BTNode node)
         {
             NodeView nodeView = new NodeView(node);
+            nodeView.m_OnNodeSelected = m_OnNodeSelected;
             AddElement(nodeView);
         }
 

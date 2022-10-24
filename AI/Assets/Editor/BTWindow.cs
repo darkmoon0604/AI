@@ -37,16 +37,23 @@ namespace Game.AI.BehaviorTree.Window
             m_TreeView = root.Q<TreeView>();
             m_InspectorView = root.Q<InspectorView>();
 
+            m_TreeView.m_OnNodeSelected = OnNodeViewSelcetionChanged;
+
             OnSelectionChange();
         }
 
         private void OnSelectionChange()
         {
             var tree = Selection.activeObject as BehaviorTree;
-            if (tree)
+            if (tree && AssetDatabase.CanOpenAssetInEditor(tree.GetInstanceID()))
             {
                 m_TreeView.PopulateView(tree);
             }
+        }
+
+        private void OnNodeViewSelcetionChanged(NodeView nodeView)
+        {
+            m_InspectorView.UpdateSelection(nodeView);
         }
     }
 }

@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine.UIElements;
 
 namespace Game.AI.BehaviorTree.Window
@@ -9,9 +10,24 @@ namespace Game.AI.BehaviorTree.Window
 
         }
 
+        private Editor m_Editor;
+
         public InspectorView()
         {
 
+        }
+
+        internal void UpdateSelection(NodeView nodeView)
+        {
+            Clear();
+
+            UnityEngine.Object.DestroyImmediate(m_Editor);
+            m_Editor = Editor.CreateEditor(nodeView.m_Node);
+            IMGUIContainer container = new IMGUIContainer(() => 
+            {
+                m_Editor.OnInspectorGUI();
+            });
+            Add(container);
         }
     }
 }

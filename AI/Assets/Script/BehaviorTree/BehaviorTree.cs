@@ -51,6 +51,12 @@ namespace Game.AI.BehaviorTree
                 decorator.m_Child = child;
             }
 
+            var root = parent as RootNode;
+            if (root != null)
+            {
+                root.m_Child = child;
+            }
+
             var composite = parent as CompositeNode;
             if (composite != null)
             {
@@ -64,6 +70,12 @@ namespace Game.AI.BehaviorTree
             if (decorator != null)
             {
                 decorator.m_Child = null;
+            }
+
+            var root = parent as RootNode;
+            if (root != null)
+            {
+                root.m_Child = null;
             }
 
             var composite = parent as CompositeNode;
@@ -83,6 +95,12 @@ namespace Game.AI.BehaviorTree
                 ret.Add(decorator.m_Child);
             }
 
+            var root = parent as RootNode;
+            if (root != null && root.m_Child != null)
+            {
+                ret.Add(root.m_Child);
+            }
+
             var composite = parent as CompositeNode;
             if (composite != null)
             {
@@ -90,6 +108,13 @@ namespace Game.AI.BehaviorTree
             }
 
             return ret;
+        }
+
+        public BehaviorTree Clone()
+        {
+            var tree = Instantiate(this);
+            this.m_rootNode = tree.m_rootNode.Clone();
+            return tree;
         }
     }
 }

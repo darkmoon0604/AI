@@ -18,10 +18,13 @@ namespace Game.AI.BehaviorTree
 
         public State m_State = State.Running;
 
+        [HideInInspector]
         public bool m_Started = false;
 
+        [HideInInspector]
         public string m_Title;
 
+        [HideInInspector]
         public string m_Guid;
 
 #if UNITY_EDITOR
@@ -45,6 +48,11 @@ namespace Game.AI.BehaviorTree
             }
 
             return m_State;
+        }
+
+        public virtual Node Clone()
+        {
+            return Instantiate(this);
         }
 
         protected abstract void OnStart();

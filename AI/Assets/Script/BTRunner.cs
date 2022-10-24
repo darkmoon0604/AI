@@ -10,12 +10,7 @@ public class BTRunner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        bt = ScriptableObject.CreateInstance<BehaviorTree>();
-
-        var log = ScriptableObject.CreateInstance<TestActionNode>();
-        log.m_Message = "111111111";
-
-        bt.m_rootNode = log;
+        bt = bt.Clone();
     }
 
     // Update is called once per frame

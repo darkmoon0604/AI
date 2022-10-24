@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEditor.Experimental.GraphView;
+using System;
 
 namespace Game.AI.BehaviorTree.Window
 {
@@ -9,6 +10,8 @@ namespace Game.AI.BehaviorTree.Window
 
         public Port m_Input;
         public Port m_Output;
+
+        public Action<NodeView> m_OnNodeSelected;
 
         public NodeView(Node node)
         {
@@ -31,6 +34,16 @@ namespace Game.AI.BehaviorTree.Window
             this.m_Node.m_Position.y = newPos.yMin;
         }
 
+        public override void OnSelected()
+        {
+            base.OnSelected();
+
+            if (m_OnNodeSelected != null)
+            {
+                m_OnNodeSelected(this);
+            }
+        }
+
         private void CreateInputPorts()
         {
             if (m_Node is DecoratorNode)
@@ -42,6 +55,10 @@ namespace Game.AI.BehaviorTree.Window
                 m_Input = InstantiatePort(Orientation.Horizontal, Direction.Input, Port.Capacity.Single, typeof(bool));
             }
             else if (m_Node is ActionNode)
+            {
+                m_Input = InstantiatePort(Orientation.Horizontal, Direction.Input, Port.Capacity.Single, typeof(bool));
+            }
+            else if (m_Node is RootNode)
             {
                 m_Input = InstantiatePort(Orientation.Horizontal, Direction.Input, Port.Capacity.Single, typeof(bool));
             }
@@ -62,6 +79,10 @@ namespace Game.AI.BehaviorTree.Window
             else if (m_Node is CompositeNode)
             {
                 m_Output = InstantiatePort(Orientation.Horizontal, Direction.Output, Port.Capacity.Multi, typeof(bool));
+            }
+            else if (m_Node is RootNode)
+            {
+                m_Output = InstantiatePort(Orientation.Horizontal, Direction.Output, Port.Capacity.Single, typeof(bool));
             }
             else if (m_Node is ActionNode)
             {

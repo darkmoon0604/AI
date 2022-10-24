@@ -4,8 +4,11 @@ using UnityEngine;
 
 namespace Game.AI.BehaviorTree
 {
-    public class RepeatNode : DecoratorNode
+    public class RootNode : Node
     {
+        [HideInInspector]
+        public Node m_Child;
+
         protected override void OnStart()
         {
             
@@ -18,12 +21,14 @@ namespace Game.AI.BehaviorTree
 
         protected override State OnUpdate()
         {
-            if (m_Child != null)
-            {
-                m_Child.Update();
-            }
-            
-            return State.Running;
+            return m_Child.Update();
+        }
+
+        public override Node Clone()
+        {
+            RootNode node = Instantiate(this);
+            node.m_Child = m_Child.Clone();
+            return node;
         }
     }
 }
