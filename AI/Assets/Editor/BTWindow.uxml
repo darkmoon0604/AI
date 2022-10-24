@@ -1,0 +1,12 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Game.AI.BehaviorTree.Window.SplitView fixed-pane-initial-dimension="200">
+        <ui:VisualElement>
+            <ui:Label text="Inspector" display-tooltip-when-elided="true" style="background-color: rgb(37, 37, 37);" />
+            <Game.AI.BehaviorTree.Window.InspectorView style="height: 603px; width: 244px; position: absolute; left: 0; top: 0; right: 0; bottom: 0;" />
+        </ui:VisualElement>
+        <ui:VisualElement>
+            <ui:Label text="Tree View" display-tooltip-when-elided="true" style="background-color: rgb(37, 37, 37);" />
+            <Game.AI.BehaviorTree.Window.TreeView focusable="true" style="position: absolute; left: 0; top: 16px; right: 1px; bottom: 1px;" />
+        </ui:VisualElement>
+    </Game.AI.BehaviorTree.Window.SplitView>
+</ui:UXML>

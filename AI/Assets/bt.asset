@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-486901551467174517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e537239d6dce2045bf2e56772b5e6df, type: 3}
+  m_Name: SequencerNode
+  m_EditorClassIdentifier: 
+  m_State: 0
+  m_Started: 0
+  m_Title: SequencerNode
+  m_Guid: c7690e171ae404b4ca9b8233ad78809b
+  m_Position: {x: 22, y: 76}
+  m_Childs:
+  - {fileID: 5893378917146307798}
+  - {fileID: 5275469553813949577}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7f9d32bb0ba24542be89d4c1a1d9447, type: 3}
+  m_Name: bt
+  m_EditorClassIdentifier: 
+  m_rootNode: {fileID: 0}
+  m_TreeState: 0
+  m_Nodes:
+  - {fileID: 5275469553813949577}
+  - {fileID: 5893378917146307798}
+  - {fileID: -486901551467174517}
+--- !u!114 &5275469553813949577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3136116162d5ff84b9f11033c00a95f5, type: 3}
+  m_Name: WaitNode
+  m_EditorClassIdentifier: 
+  m_State: 0
+  m_Started: 0
+  m_Title: WaitNode
+  m_Guid: 6797cfc5ec0728f489e15d43d6510f56
+  m_Position: {x: 279.24, y: 144}
+  m_Duration: 1
+--- !u!114 &5893378917146307798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4af0aebe039873445a55bd0464245850, type: 3}
+  m_Name: RepeatNode
+  m_EditorClassIdentifier: 
+  m_State: 0
+  m_Started: 0
+  m_Title: RepeatNode
+  m_Guid: 632b94259d6d546479ea52a6fe063732
+  m_Position: {x: 270.03998, y: 21.679993}
+  m_Child: {fileID: 0}
