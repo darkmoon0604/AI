@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEditor.Experimental.GraphView;
 using System;
+using UnityEngine.UIElements;
+using UnityEditor;
 
 namespace Game.AI.BehaviorTree.Window
 {
@@ -13,7 +15,7 @@ namespace Game.AI.BehaviorTree.Window
 
         public Action<NodeView> m_OnNodeSelected;
 
-        public NodeView(Node node)
+        public NodeView(Node node) : base("Assets/Editor/NodeView.uxml")
         {
             this.m_Node = node;
             this.title = node.m_Title;
@@ -24,6 +26,30 @@ namespace Game.AI.BehaviorTree.Window
 
             CreateInputPorts();
             CreateOutputPorts();
+            SetNodeClasses();
+        }
+
+        /// <summary>
+        /// …Ë÷√nodeÀ˘ Ùµƒclass
+        /// </summary>
+        private void SetNodeClasses()
+        {
+            if (m_Node is DecoratorNode)
+            {
+                AddToClassList("decorator");
+            }
+            else if (m_Node is CompositeNode)
+            {
+                AddToClassList("composite");
+            }
+            else if (m_Node is ActionNode)
+            {
+                AddToClassList("action");
+            }
+            else if (m_Node is RootNode)
+            {
+                AddToClassList("root");
+            }
         }
 
         public override void SetPosition(Rect newPos)
@@ -48,24 +74,25 @@ namespace Game.AI.BehaviorTree.Window
         {
             if (m_Node is DecoratorNode)
             {
-                m_Input = InstantiatePort(Orientation.Horizontal, Direction.Input, Port.Capacity.Single, typeof(bool));
+                m_Input = InstantiatePort(Orientation.Vertical, Direction.Input, Port.Capacity.Single, typeof(bool));
             }
             else if (m_Node is CompositeNode)
             {
-                m_Input = InstantiatePort(Orientation.Horizontal, Direction.Input, Port.Capacity.Single, typeof(bool));
+                m_Input = InstantiatePort(Orientation.Vertical, Direction.Input, Port.Capacity.Single, typeof(bool));
             }
             else if (m_Node is ActionNode)
             {
-                m_Input = InstantiatePort(Orientation.Horizontal, Direction.Input, Port.Capacity.Single, typeof(bool));
+                m_Input = InstantiatePort(Orientation.Vertical, Direction.Input, Port.Capacity.Single, typeof(bool));
             }
             else if (m_Node is RootNode)
             {
-                m_Input = InstantiatePort(Orientation.Horizontal, Direction.Input, Port.Capacity.Single, typeof(bool));
+                //m_Input = InstantiatePort(Orientation.Vertical, Direction.Input, Port.Capacity.Single, typeof(bool));
             }
 
             if (m_Input != null)
             {
                 m_Input.portName = "";
+                m_Input.style.flexDirection = FlexDirection.Column;
                 inputContainer.Add(m_Input);
             }
         }
@@ -74,15 +101,15 @@ namespace Game.AI.BehaviorTree.Window
         {
             if (m_Node is DecoratorNode)
             {
-                m_Output = InstantiatePort(Orientation.Horizontal, Direction.Output, Port.Capacity.Single, typeof(bool));
+                m_Output = InstantiatePort(Orientation.Vertical, Direction.Output, Port.Capacity.Single, typeof(bool));
             }
             else if (m_Node is CompositeNode)
             {
-                m_Output = InstantiatePort(Orientation.Horizontal, Direction.Output, Port.Capacity.Multi, typeof(bool));
+                m_Output = InstantiatePort(Orientation.Vertical, Direction.Output, Port.Capacity.Multi, typeof(bool));
             }
             else if (m_Node is RootNode)
             {
-                m_Output = InstantiatePort(Orientation.Horizontal, Direction.Output, Port.Capacity.Single, typeof(bool));
+                m_Output = InstantiatePort(Orientation.Vertical, Direction.Output, Port.Capacity.Single, typeof(bool));
             }
             else if (m_Node is ActionNode)
             {
@@ -92,6 +119,7 @@ namespace Game.AI.BehaviorTree.Window
             if (m_Output != null)
             {
                 m_Output.portName = "";
+                m_Output.style.flexDirection = FlexDirection.ColumnReverse;
                 outputContainer.Add(m_Output);
             }
         }
