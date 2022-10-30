@@ -25,7 +25,10 @@ namespace Game.AI.BehaviorTree.Window
             m_Editor = Editor.CreateEditor(nodeView.m_Node);
             IMGUIContainer container = new IMGUIContainer(() => 
             {
-                m_Editor.OnInspectorGUI();
+                if (m_Editor.target)
+                {
+                    m_Editor.OnInspectorGUI();
+                }
             });
             Add(container);
         }

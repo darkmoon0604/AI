@@ -36,6 +36,14 @@ namespace Game.AI.BehaviorTree.Window
 
             var styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>("Assets/Editor/BTWindow.uss");
             styleSheets.Add(styleSheet);
+
+            Undo.undoRedoPerformed += UndoRedo;
+        }
+
+        private void UndoRedo()
+        {
+            PopulateView(m_Tree);
+            AssetDatabase.SaveAssets();
         }
 
         internal void PopulateView(BehaviorTree tree)

@@ -56,8 +56,12 @@ namespace Game.AI.BehaviorTree.Window
         {
             base.SetPosition(newPos);
 
+            Undo.RecordObject(m_Node, "BT(Set Position)");
+
             this.m_Node.m_Position.x = newPos.xMin;
             this.m_Node.m_Position.y = newPos.yMin;
+
+            EditorUtility.SetDirty(m_Node);
         }
 
         public override void OnSelected()
