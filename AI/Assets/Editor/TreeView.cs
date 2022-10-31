@@ -126,6 +126,18 @@ namespace Game.AI.BehaviorTree.Window
                 });
             }
 
+            if (graphViewChanged.movedElements != null)
+            {
+                nodes.ForEach((n) => 
+                {
+                    var nodeView = n as NodeView;
+                    if (nodeView != null)
+                    {
+                        nodeView.SortChild();
+                    }
+                });
+            }
+
             return graphViewChanged;
         }
 
@@ -183,6 +195,18 @@ namespace Game.AI.BehaviorTree.Window
         {
             BTNode node = m_Tree.CreateNode(type);
             CreateNodeView(node);
+        }
+
+        public void UpdateNodeState()
+        {
+            nodes.ForEach((n) => 
+            {
+                var nodeView = n as NodeView;
+                if (nodeView != null)
+                {
+                    nodeView.UpdateState();
+                }
+            });
         }
     }
 }

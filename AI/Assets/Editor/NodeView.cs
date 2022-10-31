@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEditor.Experimental.GraphView;
 using System;
 using UnityEngine.UIElements;
+using UnityEditor.UIElements;
 using UnityEditor;
 
 namespace Game.AI.BehaviorTree.Window
@@ -27,6 +28,10 @@ namespace Game.AI.BehaviorTree.Window
             CreateInputPorts();
             CreateOutputPorts();
             SetNodeClasses();
+
+            Label label = this.Q<Label>("desc");
+            label.bindingPath = "m_Description";
+            label.Bind(new SerializedObject(node));
         }
 
         /// <summary>
@@ -125,6 +130,44 @@ namespace Game.AI.BehaviorTree.Window
                 m_Output.portName = "";
                 m_Output.style.flexDirection = FlexDirection.ColumnReverse;
                 outputContainer.Add(m_Output);
+            }
+        }
+
+        public void SortChild()
+        {
+            CompositeNode composite = m_Node as CompositeNode;
+            if (composite)
+            {
+                composite.m_Childs.Sort((left, right) => 
+                {
+                    return left.m_Position.x < right.m_Position.y ? -1 : 1;
+                });
+            }
+        }
+
+        public void UpdateState()
+        {
+            RemoveFromClassList("running");
+            RemoveFromClassList("success");
+            RemoveFromClassList("failure");
+
+            if (Application.isPlaying)
+            {
+                switch (m_Node.m_State)
+                {
+                    case Node.State.Running:
+                        if (m_Node.m_Started)
+                        {
+                            AddToClassList("running");
+                        }
+                        break;
+                    case Node.State.Success:
+                        AddToClassList("success");
+                        break;
+                    case Node.State.Failure:
+                        AddToClassList("failure");
+                        break;
+                }
             }
         }
     }

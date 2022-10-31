@@ -11,7 +11,7 @@ namespace Game.AI.BehaviorTree
         public Node m_rootNode;
         public Node.State m_TreeState = Node.State.Running;
         public List<Node> m_Nodes = new List<Node>();
-
+        public Blackboard m_Blackboard = new Blackboard();
 
         public Node.State OnUpdate()
         {
@@ -33,7 +33,11 @@ namespace Game.AI.BehaviorTree
             Undo.RecordObject(this, "BT(Create Node)");
             m_Nodes.Add(node);
 
-            AssetDatabase.AddObjectToAsset(node, this);
+            if (!Application.isPlaying)
+            {
+                AssetDatabase.AddObjectToAsset(node, this);
+            }
+            
             Undo.RegisterCreatedObjectUndo(node, "BT(Create Node)");
             AssetDatabase.SaveAssets();
             return node;
@@ -130,8 +134,31 @@ namespace Game.AI.BehaviorTree
         public BehaviorTree Clone()
         {
             var tree = Instantiate(this);
-            this.m_rootNode = tree.m_rootNode.Clone();
+            tree.m_rootNode = tree.m_rootNode.Clone();
+            tree.m_Nodes = new List<Node>();
+            Traverse(tree.m_rootNode, (n) => 
+            {
+                tree.m_Nodes.Add(n);
+            });
             return tree;
+        }
+
+        public void Traverse(Node node, System.Action<Node> visiter)
+        {
+            if (node)
+            {
+                visiter.Invoke(node);
+                var childs = GetChilds(node);
+                childs.ForEach((n) => Traverse(n, visiter));
+            }
+        }
+
+        public void Bind()
+        {
+            Traverse(m_rootNode, (n) =>
+            {
+                n.m_Blackboard = m_Blackboard;
+            });
         }
 #endif
     }

@@ -1,5 +1,5 @@
 #node-border {
-    background-color: rgba(56, 56, 56, 255);
+    background-color: rgb(56, 56, 56);
     border-left-width: 1px;
     border-right-width: 1px;
     border-top-width: 1px;
@@ -32,10 +32,10 @@
     border-right-width: 0;
     border-top-width: 0;
     border-bottom-width: 0;
-    border-left-color: rgba(0, 167, 225, 255);
-    border-right-color: rgba(0, 167, 225, 255);
-    border-top-color: rgba(0, 167, 225, 255);
-    border-bottom-color: rgba(0, 167, 225, 255);
+    border-left-color: rgb(0, 167, 225);
+    border-right-color: rgb(0, 167, 225);
+    border-top-color: rgb(0, 167, 225);
+    border-bottom-color: rgb(0, 167, 225);
 }
 
 :hover > #selection-border {
@@ -86,26 +86,89 @@
 
 #desc {
     font-size: 10px;
+    max-width: 150px;
+    white-space: normal;
 }
 
 #divider {
     min-height: 1px;
-    background-color: rgba(108, 101, 101, 255);
+    background-color: rgb(108, 101, 101);
 }
 
 .action #input {
-    background-color: rgba(251, 172, 190, 255);
+    background-color: rgb(251, 172, 190);
 }
 
 .composite #input {
-    background-color: rgba(255, 155, 66, 255);
+    background-color: rgb(255, 155, 66);
 }
 
 .decorator #input {
-    background-color: rgba(185, 210, 177, 255);
+    background-color: rgb(185, 210, 177);
 }
 
 .root #input {
-    background-color: rgba(161, 130, 118, 255);
+    background-color: rgb(161, 130, 118);
     min-height: 20px;
+}
+
+#node-state {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.running #node-state {
+    border-left-color: rgba(250, 55, 226, 255);
+    border-right-color: rgba(250, 55, 226, 255);
+    border-top-color: rgba(250, 55, 226, 255);
+    border-bottom-color: rgba(250, 55, 226, 255);
+    border-left-width: 2px;
+    border-right-width: 2px;
+    border-top-width: 2px;
+    border-bottom-width: 2px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.success #node-state {
+    border-left-width: 2px;
+    border-right-width: 2px;
+    border-top-width: 2px;
+    border-bottom-width: 2px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-left-color: rgba(255, 255, 255, 255);
+    border-right-color: rgba(255, 255, 255, 255);
+    border-top-color: rgba(255, 255, 255, 255);
+    border-bottom-color: rgba(255, 255, 255, 255);
+}
+
+.failure #node-state {
+    border-left-width: 2px;
+    border-right-width: 2px;
+    border-top-width: 2px;
+    border-bottom-width: 2px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-left-color: rgba(255, 0, 0, 255);
+    border-right-color: rgba(255, 0, 0, 255);
+    border-top-color: rgba(255, 0, 0, 255);
+    border-bottom-color: rgba(255, 0, 0, 255);
 }

@@ -54,9 +54,10 @@ MonoBehaviour:
   m_Started: 0
   m_Title: SequencerNode
   m_Guid: 4ad7cb687c10d964d9e143ed1f0bc807
-  m_Position: {x: 211, y: 43}
+  m_Position: {x: 216, y: 36}
   m_Childs:
   - {fileID: 6908037340002003877}
+  - {fileID: 5475178650870917996}
 --- !u!114 &5450830773029680363
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -73,7 +74,7 @@ MonoBehaviour:
   m_Started: 0
   m_Title: RepeatNode
   m_Guid: 8b8bb0b105f105c43bcd7e0f7ce6cd2f
-  m_Position: {x: 213, y: -69}
+  m_Position: {x: 213, y: -80.8}
   m_Child: {fileID: 968708549934775491}
 --- !u!114 &5475178650870917996
 MonoBehaviour:
@@ -91,7 +92,7 @@ MonoBehaviour:
   m_Started: 0
   m_Title: TestActionNode
   m_Guid: 37fcf0d033eadb5409744c313e354fc1
-  m_Position: {x: 0, y: 0}
+  m_Position: {x: 342, y: 175}
   m_Message: 
 --- !u!114 &6908037340002003877
 MonoBehaviour:

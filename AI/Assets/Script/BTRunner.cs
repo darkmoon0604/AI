@@ -11,6 +11,7 @@ public class BTRunner : MonoBehaviour
     void Start()
     {
         bt = bt.Clone();
+        bt.Bind();
     }
 
     // Update is called once per frame

@@ -16,6 +16,7 @@ namespace Game.AI.BehaviorTree
             Failure,
         }
 
+        [HideInInspector]
         public State m_State = State.Running;
 
         [HideInInspector]
@@ -28,7 +29,13 @@ namespace Game.AI.BehaviorTree
         public string m_Guid;
 
 #if UNITY_EDITOR
+        [HideInInspector]
         public Vector2 m_Position;
+
+        [HideInInspector]
+        public Blackboard m_Blackboard;
+
+        [TextArea] public string m_Description;
 #endif
 
         public State Update()
