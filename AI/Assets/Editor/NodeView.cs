@@ -140,7 +140,7 @@ namespace Game.AI.BehaviorTree.Window
             {
                 composite.m_Childs.Sort((left, right) => 
                 {
-                    return left.m_Position.x < right.m_Position.y ? -1 : 1;
+                    return left.m_Position.x < right.m_Position.x ? -1 : 1;
                 });
             }
         }

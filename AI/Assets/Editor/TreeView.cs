@@ -48,6 +48,7 @@ namespace Game.AI.BehaviorTree.Window
 
         internal void PopulateView(BehaviorTree tree)
         {
+
             this.m_Tree = tree;
 
             graphViewChanged -= OnGraphViewChanged;

@@ -1,5 +1,6 @@
 using System;
 using UnityEditor;
+using UnityEditor.Callbacks;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -19,6 +20,17 @@ namespace Game.AI.BehaviorTree.Window
         {
             BTWindow wnd = GetWindow<BTWindow>();
             wnd.titleContent = new GUIContent("BTWindow");
+        }
+
+        [OnOpenAsset]
+        public static bool OnOpenAsset(int instanceId, int line)
+        {
+            if (Selection.activeObject is BehaviorTree)
+            {
+                ShowExample();
+                return true;
+            }
+            return false;
         }
 
         private void OnEnable()

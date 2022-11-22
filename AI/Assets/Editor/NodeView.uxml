@@ -7,7 +7,7 @@
             <ui:VisualElement name="top">
                 <ui:VisualElement name="input" />
                 <ui:VisualElement name="divider" class="vertical" />
-                <ui:VisualElement name="title" style="-unity-font-style: normal; font-size: 12px;">
+                <ui:VisualElement name="title" style="-unity-font-style: normal;">
                     <ui:Label name="title-label" text="RepeatNode" class="unity-text-element unity-label" />
                     <ui:VisualElement name="title-button-container">
                         <ui:VisualElement name="collapse-button">
@@ -15,7 +15,7 @@
                         </ui:VisualElement>
                     </ui:VisualElement>
                 </ui:VisualElement>
-                <ui:Label text="Label" display-tooltip-when-elided="true" name="desc" />
+                <ui:Label text="Description" display-tooltip-when-elided="true" name="desc" />
                 <ui:VisualElement name="divider" class="vertical" />
                 <ui:VisualElement name="output" />
             </ui:VisualElement>
